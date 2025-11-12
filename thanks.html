@@ -1,0 +1,75 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>為老重建說明會｜影片與報名</title>
+
+<style>
+  :root { --bg:#0b0f1a; --card:#121826; --muted:#94a3b8; --brand:#ef4444; --brand2:#22c55e; --text:#e5e7eb; }
+  *{box-sizing:border-box} html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; color:var(--text); background:var(--bg);}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:20px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+  .btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--brand);color:white;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(239,68,68,.25)}
+  .btn.secondary{background:#334155}
+  .btn.green{background:var(--brand2);box-shadow:0 8px 20px rgba(34,197,94,.25)}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+  .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid rgba(148,163,184,.2);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:#0ea5e90d;border:1px solid #0284c76b;color:#7dd3fc;font-weight:600;font-size:13px}
+  h1{font-size:34px;line-height:1.2;margin:10px 0 8px}
+  h2{font-size:22px;margin:0 0 10px}
+  p{color:var(--muted);font-size:16px}
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .qcard{background:#0f172a;border-left:6px solid #ef4444;border-radius:12px;padding:14px 16px;box-shadow:0 8px 18px rgba(0,0,0,.35)}
+  .qcard h3{margin:0 0 6px;font-size:17px}
+  .qcard p{margin:0;font-size:14px}
+  .field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+  input{padding:12px;border-radius:10px;border:1px solid #334155;background:#0b1020;color:white}
+  label{font-weight:600;color:#cbd5e1}
+  .footer{opacity:.7;font-size:13px;margin-top:24px}
+  .admin-link{position:fixed;right:16px;top:16px;z-index:50}
+  iframe{width:100%;height:320px;border:0;border-radius:14px}
+  .event{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .badge{display:inline-block;background:#16a34a22;color:#86efac;border:1px solid #16a34a6b;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr} .grid4{grid-template-columns:1fr} .event{grid-template-columns:1fr} }
+</style>
+
+</head>
+<body>
+<a class="btn secondary admin-link" href="admin.html">📊 資料後台登入</a>
+<div class="container">
+  <div class="topbar">
+    <div class="pill">感謝填寫｜以下為說明會資訊</div>
+  </div>
+
+  <div class="card">
+    <h1 style="margin-top:0">為老重建免費說明會</h1>
+    <div class="event">
+      <div>
+        <p><strong>主辦單位：</strong>起鈊厝</p>
+        <p><strong>協辦單位：</strong>總管家住宅服務股份有限公司</p>
+        <p><strong>時間：</strong>12/19 19:00</p>
+        <p><strong>地址：</strong>台中市北區臺灣大道二段340號九樓之2</p>
+        <a class="btn green" href="https://line.me/ti/p/40LmfznrLG" target="_blank" rel="noopener">立即加入 LINE 免費報名</a>
+      </div>
+      <div class="card">
+        <h2 style="margin-top:0">重點內容</h2>
+        <ul style="line-height:1.9;color:#cbd5e1;padding-left:18px">
+          <li>為老重建與危老：怎麼選最省時？</li>
+          <li>補助／容積／稅務：你能拿到多少？</li>
+          <li>資金里程與安置補貼：現金流不爆</li>
+          <li>權益分配與加權：不吃虧的選戶心法</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h2 style="margin:0 0 10px">研討會影片</h2>
+    <iframe src="https://www.youtube.com/embed/icTBDq1r1S0?si=_hoEm9_YGOD1u9Uk" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+</div>
+</body>
+</html>

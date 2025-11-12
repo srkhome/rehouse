@@ -1,0 +1,157 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>資料後台｜為老重建名單</title>
+
+<style>
+  :root { --bg:#0b0f1a; --card:#121826; --muted:#94a3b8; --brand:#ef4444; --brand2:#22c55e; --text:#e5e7eb; }
+  *{box-sizing:border-box} html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; color:var(--text); background:var(--bg);}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:20px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+  .btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--brand);color:white;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(239,68,68,.25)}
+  .btn.secondary{background:#334155}
+  .btn.green{background:var(--brand2);box-shadow:0 8px 20px rgba(34,197,94,.25)}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+  .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid rgba(148,163,184,.2);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:#0ea5e90d;border:1px solid #0284c76b;color:#7dd3fc;font-weight:600;font-size:13px}
+  h1{font-size:34px;line-height:1.2;margin:10px 0 8px}
+  h2{font-size:22px;margin:0 0 10px}
+  p{color:var(--muted);font-size:16px}
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .qcard{background:#0f172a;border-left:6px solid #ef4444;border-radius:12px;padding:14px 16px;box-shadow:0 8px 18px rgba(0,0,0,.35)}
+  .qcard h3{margin:0 0 6px;font-size:17px}
+  .qcard p{margin:0;font-size:14px}
+  .field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+  input{padding:12px;border-radius:10px;border:1px solid #334155;background:#0b1020;color:white}
+  label{font-weight:600;color:#cbd5e1}
+  .footer{opacity:.7;font-size:13px;margin-top:24px}
+  .admin-link{position:fixed;right:16px;top:16px;z-index:50}
+  iframe{width:100%;height:320px;border:0;border-radius:14px}
+  .event{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .badge{display:inline-block;background:#16a34a22;color:#86efac;border:1px solid #16a34a6b;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr} .grid4{grid-template-columns:1fr} .event{grid-template-columns:1fr} }
+</style>
+
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <div class="pill">資料後台</div>
+    <a class="btn secondary" href="index.html">⟵ 回首頁</a>
+  </div>
+
+  <div id="loginCard" class="card" style="max-width:520px;margin:0 auto">
+    <h2 style="margin-top:0">請輸入管理員帳密</h2>
+    <div class="field"><label>帳號</label><input id="acc" placeholder="ueue31@gmail.com" /></div>
+    <div class="field"><label>密碼</label><input id="pwd" type="password" placeholder="••••••••" /></div>
+    <button class="btn" id="loginBtn">登入</button>
+    <p class="footer">小提醒：此頁以瀏覽器 LocalStorage 測試儲存，正式上線請接後端資料庫。</p>
+  </div>
+
+  <div id="tableCard" class="card" style="display:none">
+    <h2 style="margin-top:0">名單總表</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+      <button class="btn secondary" id="refreshBtn">重新載入</button>
+      <button class="btn green" id="downloadBtn">下載CSV</button>
+      <button class="btn" id="clearBtn" style="background:#dc2626">清空名單（測試）</button>
+    </div>
+    <div style="overflow:auto">
+      <table id="leadTable" style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr style="background:#0b1222">
+            <th style="text-align:left;padding:10px;border-bottom:1px solid #334155">姓名</th>
+            <th style="text-align:left;padding:10px;border-bottom:1px solid #334155">Email</th>
+            <th style="text-align:left;padding:10px;border-bottom:1px solid #334155">是否自有住宅</th>
+            <th style="text-align:left;padding:10px;border-bottom:1px solid #334155">填寫時間</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  const ACC = "ueue31@gmail.com";
+  const PWD = "87654321";
+
+  const loginCard = document.getElementById('loginCard');
+  const tableCard = document.getElementById('tableCard');
+  const loginBtn = document.getElementById('loginBtn');
+  const refreshBtn = document.getElementById('refreshBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function renderTable(){
+    const tbody = document.querySelector('#leadTable tbody');
+    tbody.innerHTML = '';
+    const leads = JSON.parse(localStorage.getItem('leads') || '[]');
+    leads.sort((a,b)=> new Date(b.ts) - new Date(a.ts));
+    leads.forEach(l=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="padding:10px;border-bottom:1px solid #334155">${l.name||''}</td>
+        <td style="padding:10px;border-bottom:1px solid #334155">${l.email||''}</td>
+        <td style="padding:10px;border-bottom:1px solid #334155">${l.own||''}</td>
+        <td style="padding:10px;border-bottom:1px solid #334155">${new Date(l.ts).toLocaleString()}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function toCSV(rows){
+    if(!rows.length) return '';
+    const headers = Object.keys(rows[0]);
+    const esc = v => ('"' + String(v).replaceAll('"','""') + '"');
+    const data = [headers.join(',')].concat(
+      rows.map(r => headers.map(h => esc(r[h] ?? '')).join(','))
+    ).join('\n');
+    return data;
+  }
+
+  loginBtn.onclick = () => {
+    const acc = document.getElementById('acc').value.trim();
+    const pwd = document.getElementById('pwd').value.trim();
+    if(acc === ACC && pwd === PWD){
+      loginCard.style.display = 'none';
+      tableCard.style.display = 'block';
+      renderTable();
+      sessionStorage.setItem('adminAuthed','1');
+    } else {
+      alert('帳密不正確');
+    }
+  };
+
+  if(sessionStorage.getItem('adminAuthed')==='1'){
+    loginCard.style.display = 'none';
+    tableCard.style.display = 'block';
+    renderTable();
+  }
+
+  refreshBtn.onclick = renderTable;
+
+  downloadBtn.onclick = () => {
+    const leads = JSON.parse(localStorage.getItem('leads') || '[]');
+    const csv = toCSV(leads);
+    const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'leads.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
+
+  clearBtn.onclick = () => {
+    if(confirm('確定清空？（僅清空瀏覽器LocalStorage資料）')){
+      localStorage.removeItem('leads');
+      renderTable();
+    }
+  };
+</script>
+</body>
+</html>
