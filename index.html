@@ -1,47 +1,49 @@
-
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>為老重建免費說明會 | 名單收集</title>
-
+<!doctype html><html lang='zh-Hant'><head><meta charset='utf-8' /><meta name='viewport' content='width=device-width, initial-scale=1' /><title>為老重建免費說明會 | 名單收集</title>
 <style>
-  :root { --bg:#0b0f1a; --card:#121826; --muted:#94a3b8; --brand:#ef4444; --brand2:#22c55e; --text:#e5e7eb; }
-  *{box-sizing:border-box} html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; color:var(--text); background:var(--bg);}
+  :root {
+    --bg:#f0f7ff;
+    --card:#ffffff;
+    --border:#d3e4ff;
+    --text:#0f172a;
+    --muted:#475569;
+    --brand:#007bff;
+    --brand2:#00bcd4;
+    --accent:#ff4d4f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; color:var(--text); background:var(--bg);}
   a{color:inherit;text-decoration:none}
   .container{max-width:1100px;margin:0 auto;padding:20px}
   .topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
-  .btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--brand);color:white;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(239,68,68,.25)}
-  .btn.secondary{background:#334155}
-  .btn.green{background:var(--brand2);box-shadow:0 8px 20px rgba(34,197,94,.25)}
+  .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--brand);color:white;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(0,123,255,.25)}
+  .btn.secondary{background:#e2e8f0;color:#0f172a;box-shadow:none;border:1px solid #cbd5e1}
+  .btn.green{background:var(--brand2);box-shadow:0 8px 20px rgba(0,188,212,.25)}
   .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-  .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid rgba(148,163,184,.2);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-  .pill{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;background:#0ea5e90d;border:1px solid #0284c76b;color:#7dd3fc;font-weight:600;font-size:13px}
-  h1{font-size:34px;line-height:1.2;margin:10px 0 8px}
+  .card{background:var(--card);border-radius:16px;padding:18px;border:1px solid var(--border);box-shadow:0 12px 28px rgba(15,23,42,.06)}
+  .pill{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:#e6f0fa;border:1px solid #cfe2ff;color:#0f4c81;font-weight:700;font-size:13px}
+  h1{font-size:34px;line-height:1.25;margin:10px 0 8px}
   h2{font-size:22px;margin:0 0 10px}
   p{color:var(--muted);font-size:16px}
   .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .qcard{background:#0f172a;border-left:6px solid #ef4444;border-radius:12px;padding:14px 16px;box-shadow:0 8px 18px rgba(0,0,0,.35)}
+  .qcard{background:#f7fbff;border-left:6px solid var(--accent);border-radius:12px;padding:14px 16px;box-shadow:0 6px 14px rgba(15,23,42,.05);border:1px solid var(--border)}
   .qcard h3{margin:0 0 6px;font-size:17px}
-  .qcard p{margin:0;font-size:14px}
+  .qcard p{margin:0;font-size:14px;color:#334155}
   .field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
-  input{padding:12px;border-radius:10px;border:1px solid #334155;background:#0b1020;color:white}
-  label{font-weight:600;color:#cbd5e1}
-  .footer{opacity:.7;font-size:13px;margin-top:24px}
+  input,select{padding:12px;border-radius:10px;border:1px solid #cbd5e1;background:#ffffff;color:#0f172a}
+  label{font-weight:700;color:#0f172a}
+  .footer{opacity:.8;font-size:13px;margin-top:24px;color:#475569}
   .admin-link{position:fixed;right:16px;top:16px;z-index:50}
-  iframe{width:100%;height:320px;border:0;border-radius:14px}
+  iframe{width:100%;height:320px;border:0;border-radius:14px;box-shadow:0 10px 24px rgba(15,23,42,.08)}
   .event{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .badge{display:inline-block;background:#16a34a22;color:#86efac;border:1px solid #16a34a6b;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+  .badge{display:inline-block;background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe;padding:8px 12px;border-radius:999px;font-weight:800;font-size:12px}
+  ul{margin:0}
   @media (max-width:900px){ .hero{grid-template-columns:1fr} .grid4{grid-template-columns:1fr} .event{grid-template-columns:1fr} }
 </style>
-
-</head>
-<body>
+</head><body>
 <a class="btn secondary admin-link" href="admin.html">📊 資料後台登入</a>
 <div class="container">
   <div class="topbar">
-    <div class="pill">為老重建｜免費30分鐘說明</div>
+    <div class="pill">為老重建｜免費60分鐘說明</div>
   </div>
 
   <section class="hero">
@@ -67,7 +69,7 @@
 
     <div class="card">
       <h2>你將快速了解</h2>
-      <ul style="line-height:1.9;color:#cbd5e1;padding-left:18px">
+      <ul style="line-height:1.9;color:#334155;padding-left:18px">
         <li>為老重建 vs 危老重建的差異與時程</li>
         <li>補助、容積獎勵、稅務減免一次說清楚</li>
         <li>重建資金規劃：貸款、撥款里程、安置補貼</li>
@@ -77,5 +79,4 @@
     </div>
   </section>
 </div>
-</body>
-</html>
+</body></html>
